@@ -1,0 +1,19 @@
+{
+    "name": "alenkalac/symfony-payments-client",
+    "description": "The client to interact with the symfony payments microservice",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alen Kalac",
+            "email": "alenkalac87@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SymfonyPayments\\": "src"
+        }
+    }
+}

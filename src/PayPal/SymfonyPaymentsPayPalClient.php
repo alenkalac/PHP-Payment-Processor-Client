@@ -4,7 +4,7 @@ namespace SymfonyPayments\PayPal;
 
 use GuzzleHttp\Client;
 
-class SymfonyPaymentsPalPalClient {
+class SymfonyPaymentsPayPalClient {
 
     public const STATUS_COMPLETED = "COMPLETED";
 

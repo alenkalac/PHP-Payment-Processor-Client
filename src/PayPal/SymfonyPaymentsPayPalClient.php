@@ -6,6 +6,8 @@ use GuzzleHttp\Client;
 
 class SymfonyPaymentsPayPalClient {
 
+    private const PAYPAL_URI = "/api/paypal/payment";
+
     public const STATUS_COMPLETED = "COMPLETED";
 
     private $url;
@@ -45,7 +47,7 @@ class SymfonyPaymentsPayPalClient {
             $body["items"] = $items;
         }
 
-        $data = $this->client->post($this->url, [
+        $data = $this->client->post($this->url . self::PAYPAL_URI, [
             "body" => json_encode($body)
         ]);
 
@@ -69,7 +71,7 @@ class SymfonyPaymentsPayPalClient {
             $body['refund_callback'] = $refundCallbackUrl;
         }
 
-        $data = $this->client->put($this->url, [
+        $data = $this->client->put($this->url . self::PAYPAL_URI, [
             "body" => json_encode($body)
         ]);
 

@@ -2,9 +2,9 @@
 
 namespace SymfonyPayments\PayPal;
 
-use GuzzleHttp\Client;
-
 require_once "../bootstrap.php";
+
+use GuzzleHttp\Client;
 
 class SymfonyPaymentsPalPalClient {
 

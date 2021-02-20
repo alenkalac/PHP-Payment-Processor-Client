@@ -1,13 +1,12 @@
-<?php 
+<?php
 
 namespace SymfonyPayments\PayPal;
 
 use GuzzleHttp\Client;
+use SymfonyPayments\Items;
 
 class SymfonyPaymentsPayPalClient {
-
     private const PAYPAL_URI = "/api/paypal/payment";
-
     public const STATUS_COMPLETED = "COMPLETED";
 
     private $url;
@@ -28,7 +27,7 @@ class SymfonyPaymentsPayPalClient {
 
     /**
      * @param $amount
-     * @param null $items
+     * @param Items $items
      * @param $returnUrl
      * @param $cancelUrl
      * @return string
@@ -44,7 +43,7 @@ class SymfonyPaymentsPayPalClient {
         ];
 
         if($items != null) {
-            $body["items"] = $items;
+            $body["items"] = $items->getItems();
         }
 
         $data = $this->client->post($this->url . self::PAYPAL_URI, [
@@ -77,5 +76,4 @@ class SymfonyPaymentsPayPalClient {
 
         return new PayPalTransactionResponse($data->getBody()->getContents());
     }
-
 }

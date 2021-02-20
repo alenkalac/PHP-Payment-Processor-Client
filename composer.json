@@ -1,6 +1,6 @@
 {
     "name": "alenkalac/symfony-payments-client",
-    "description": "The client to interact with the symfony payments microservice",
+    "description": "The client to interact with https://github.com/alenkalac/PHP-Payment-Processor microservice",
     "type": "library",
     "authors": [
         {
@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "^7.0"
+        "guzzlehttp/guzzle": "^7.0",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

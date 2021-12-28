@@ -18,7 +18,7 @@ class PayPalTransactionResponse {
         $this->amount = $data->amount;
         $this->status = $data->status;
         $this->timestamp = $data->timestamp;
-        $this->payer = json_encode($data->payer);
+        $this->payer = json_decode($data->payer);
     }
 
     /**

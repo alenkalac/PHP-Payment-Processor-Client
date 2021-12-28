@@ -8,7 +8,7 @@ class PayPalTransactionResponse {
     private $amount;
     private $status;
     private $timestamp;
-    private $payer_email;
+    private $payer;
 
     public function __construct($data){
         $data = json_decode($data);
@@ -18,7 +18,7 @@ class PayPalTransactionResponse {
         $this->amount = $data->amount;
         $this->status = $data->status;
         $this->timestamp = $data->timestamp;
-        $this->payer_email = $data->payer_email;
+        $this->payer = json_encode($data->payer);
     }
 
     /**
@@ -94,14 +94,14 @@ class PayPalTransactionResponse {
     /**
      * @return mixed
      */
-    public function getPayerEmail() {
-        return $this->payer_email;
+    public function getPayer() {
+        return $this->payer;
     }
 
     /**
-     * @param mixed $payer_email
+     * @param mixed $payer
      */
-    public function setPayerEmail($payer_email): void {
-        $this->payer_email = $payer_email;
+    public function setPayer($payer): void {
+        $this->payer = $payer;
     }
 }

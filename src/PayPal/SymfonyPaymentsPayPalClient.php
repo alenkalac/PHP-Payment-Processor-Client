@@ -3,6 +3,7 @@
 namespace SymfonyPayments\PayPal;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use SymfonyPayments\Items;
 
 class SymfonyPaymentsPayPalClient {
@@ -15,7 +16,7 @@ class SymfonyPaymentsPayPalClient {
     /**
      * @param string $url location of the SymfonyPayments
      */
-    public function __construct($url) {
+    public function __construct(string $url) {
         $this->url = $url;
 
         $this->client = new Client([
@@ -27,17 +28,17 @@ class SymfonyPaymentsPayPalClient {
 
     /**
      * @param $amount
-     * @param Items $items
-     * @param $returnUrl
-     * @param $cancelUrl
+     * @param string $currency
+     * @param Items|null $items
+     * @param null $returnUrl
+     * @param null $cancelUrl
      * @return string
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
-    public function createPayment($amount, $items = null, $returnUrl = null, $cancelUrl = null) {
-
+    public function createPaymentWithCurrency($amount, string $currency = "USD", Items $items = null, $returnUrl = null, $cancelUrl = null): string {
         $body = [
             "amount" => $amount,
-            "currency" => "USD",
+            "currency" => $currency,
             "return_url" => $returnUrl,
             "cancel_url" => $cancelUrl
         ];
@@ -54,13 +55,25 @@ class SymfonyPaymentsPayPalClient {
     }
 
     /**
+     * @param $amount
+     * @param Items|null $items
+     * @param $returnUrl
+     * @param $cancelUrl
+     * @return string
+     * @throws GuzzleException
+     */
+    public function createPayment($amount, Items $items = null, $returnUrl = null, $cancelUrl = null): string {
+        return $this->createPaymentWithCurrency($amount, "USD", $items, $returnUrl, $cancelUrl);
+    }
+
+    /**
      * @param $payerId
      * @param $orderId
      * @param null $refundCallbackUrl
      * @return PayPalTransactionResponse
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
-    public function completePayment($payerId, $orderId, $refundCallbackUrl = null) {
+    public function completePayment($payerId, $orderId, $refundCallbackUrl = null): PayPalTransactionResponse {
         $body = [
             "payerID" => $payerId,
             "orderID" => $orderId,

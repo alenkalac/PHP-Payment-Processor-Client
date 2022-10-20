@@ -6,7 +6,7 @@ use SymfonyPayments\PayPal\CompletePayPalPaymentExecutor;
 use SymfonyPayments\Stripe\CompleteStripePaymentExecutor;
 
 class CompletePaymentBuilder {
-    private const API_URI = "/api/payments/";
+    private const API_URI = "/api/payment/";
 
     private $url;
 

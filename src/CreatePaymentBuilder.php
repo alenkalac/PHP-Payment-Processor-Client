@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class CreatePaymentBuilder {
-    private const API_URI = "/api/payments/";
+    private const API_URI = "/api/payment/";
 
     private $url;
     private $client;

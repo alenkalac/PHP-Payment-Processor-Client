@@ -2,106 +2,31 @@
 
 namespace SymfonyPayments\PayPal;
 
-class PayPalTransactionResponse {
-    private $orderId;
-    private $transactionId;
-    private $amount;
-    private $status;
-    private $timestamp;
-    private $payer;
+use SymfonyPayments\Common\PayerDetails;
+use SymfonyPayments\Common\TransactionResponse;
 
-    public function __construct($data){
+class PayPalTransactionResponse {
+    public static function fromData($data): TransactionResponse {
         $data = json_decode($data);
 
-        $this->orderId = $data->orderId;
-        $this->transactionId = $data->transactionId;
-        $this->amount = $data->amount;
-        $this->status = $data->status;
-        $this->timestamp = $data->timestamp;
-        $this->payer = json_decode($data->payer);
+        $response = new TransactionResponse();
+        $response->setOrderId($data->orderId);
+        $response->setTransactionId($data->transactionId);
+        $response->setAmount($data->amount);
+        $response->setStatus($data->status);
+        $response->setTimestamp($data->timestamp);
+        $response->setPayer(self::getPayerDetails($data));
+
+        return $response;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getOrderId() {
-        return $this->orderId;
-    }
+    private static function getPayerDetails($data): PayerDetails {
+       $data = json_decode($data->payer);
 
-    /**
-     * @param mixed $orderId
-     */
-    public function setOrderId($orderId): void {
-        $this->orderId = $orderId;
-    }
+       $payer = new PayerDetails();
+       $payer->email = $data->email_address;
+       $payer->fullName = $data->name->given_name . " " . $data->name->surname;
 
-    /**
-     * @return mixed
-     */
-    public function getTransactionId() {
-        return $this->transactionId;
-    }
-
-    /**
-     * @param mixed $transactionId
-     */
-    public function setTransactionId($transactionId): void {
-        $this->transactionId = $transactionId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAmount() {
-        return $this->amount;
-    }
-
-    /**
-     * @param mixed $amount
-     */
-    public function setAmount($amount): void {
-        $this->amount = $amount;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatus() {
-        return $this->status;
-    }
-
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status): void {
-        $this->status = $status;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTimestamp() {
-        return $this->timestamp;
-    }
-
-    /**
-     * @param mixed $timestamp
-     */
-    public function setTimestamp($timestamp): void {
-        $this->timestamp = $timestamp;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPayer() {
-        return $this->payer;
-    }
-
-    /**
-     * @param mixed $payer
-     */
-    public function setPayer($payer): void {
-        $this->payer = $payer;
+       return $payer;
     }
 }

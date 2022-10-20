@@ -6,9 +6,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use SymfonyPayments\Items;
 
+/** @deprecated  */
 class SymfonyPaymentsPayPalClient {
-    private const PAYPAL_URI = "/api/paypal/payment";
-    public const STATUS_COMPLETED = "COMPLETED";
+    private const PAYPAL_URI = "/api/payments/paypal";
 
     private $url;
     private $client;

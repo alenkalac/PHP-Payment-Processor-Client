@@ -9,7 +9,7 @@ class Items {
         $this->items[] = $item->getItemArray();
     }
 
-    public function getItems() {
+    public function getItems(): array {
         return $this->items;
     }
 }

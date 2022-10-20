@@ -24,14 +24,14 @@ class Item {
     /**
      * @return string
      */
-    public function getDescription() {
+    public function getDescription(): string {
         return $this->description;
     }
 
     /**
      * @return int
      */
-    public function getQuantity() {
+    public function getQuantity(): int {
         return $this->quantity;
     }
 
@@ -42,7 +42,7 @@ class Item {
         return $this->unitAmount;
     }
 
-    public function getItemArray() {
+    public function getItemArray(): array {
         return [
             "name" => $this->name,
             "description" => $this->description,

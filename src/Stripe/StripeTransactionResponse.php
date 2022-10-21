@@ -24,8 +24,8 @@ class StripeTransactionResponse {
 
     private static function getPayerDetails($data): PayerDetails {
         $payer = new PayerDetails();
-        $payer->email = $data->email;
-        $payer->fullName = $data->name;
+        $payer->email = $data->customer_details->email;
+        $payer->fullName = $data->customer_details->name;
 
         return $payer;
     }

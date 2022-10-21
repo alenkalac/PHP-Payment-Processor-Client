@@ -93,4 +93,15 @@ class TransactionResponse {
     public function setPayer(PayerDetails $payer): void {
         $this->payer = $payer;
     }
+
+    public function toArray(): array {
+        return [
+            "orderId" => $this->orderId,
+            "transactionId" => $this->transactionId,
+            "amount" => $this->amount,
+            "status" => $this->status,
+            "timestamp" => $this->timestamp,
+            "payer" => $this->payer
+        ];
+    }
 }

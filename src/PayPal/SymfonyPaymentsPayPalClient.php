@@ -4,6 +4,7 @@ namespace SymfonyPayments\PayPal;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use SymfonyPayments\Common\TransactionResponse;
 use SymfonyPayments\Items;
 
 /** @deprecated  */
@@ -70,10 +71,10 @@ class SymfonyPaymentsPayPalClient {
      * @param $payerId
      * @param $orderId
      * @param null $refundCallbackUrl
-     * @return PayPalTransactionResponse
+     * @return TransactionResponse
      * @throws GuzzleException
      */
-    public function completePayment($payerId, $orderId, $refundCallbackUrl = null): PayPalTransactionResponse {
+    public function completePayment($payerId, $orderId, $refundCallbackUrl = null): TransactionResponse {
         $body = [
             "payerID" => $payerId,
             "orderID" => $orderId,
@@ -87,6 +88,6 @@ class SymfonyPaymentsPayPalClient {
             "body" => json_encode($body)
         ]);
 
-        return new PayPalTransactionResponse($data->getBody()->getContents());
+        return PayPalTransactionResponse::fromData($data->getBody()->getContents());
     }
 }

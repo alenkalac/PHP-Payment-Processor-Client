@@ -15,7 +15,7 @@ class StripeTransactionResponse {
         $response->setOrderId($data->id);
         $response->setTransactionId($data->id);
         $response->setAmount($data->amount_total);
-        $response->setStatus($data->payment_status);
+        $response->setStatus($data->payment_status == "paid" ? "COMPLETE" : "UNPAID");
         $response->setTimestamp($data->created);
         $response->setPayer(self::getPayerDetails($data));
 

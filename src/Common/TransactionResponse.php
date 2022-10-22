@@ -3,6 +3,8 @@
 namespace SymfonyPayments\Common;
 
 class TransactionResponse {
+    public static $TRANSACTION_SUCCESS = "COMPLETE";
+
     private $orderId;
     private $transactionId;
     private $amount;

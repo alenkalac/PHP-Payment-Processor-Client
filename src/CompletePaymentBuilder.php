@@ -17,8 +17,8 @@ class CompletePaymentBuilder {
         $this->url = $url;
     }
 
-    public function forPayPal($orderId, $payerId): CompletePayPalPaymentExecutor {
-        return new CompletePayPalPaymentExecutor($this->url . self::API_URI . "paypal", $orderId, $payerId);
+    public function forPayPal(): CompletePayPalPaymentExecutor {
+        return new CompletePayPalPaymentExecutor($this->url . self::API_URI . "paypal");
     }
 
     public function forStripe($sessionId): CompleteStripePaymentExecutor {

@@ -12,10 +12,18 @@ class CompletePayPalPaymentExecutor {
     private $orderId;
     private $payerId;
 
-    public function __construct($url, $orderId, $payerId) {
+    public function __construct($url) {
         $this->url = $url;
+    }
+
+    public function withOrderId($orderId): CompletePayPalPaymentExecutor {
         $this->orderId = $orderId;
+        return $this;
+    }
+
+    public function withPayerId($payerId): CompletePayPalPaymentExecutor {
         $this->payerId = $payerId;
+        return $this;
     }
 
     /**

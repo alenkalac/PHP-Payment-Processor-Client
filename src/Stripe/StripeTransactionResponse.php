@@ -13,7 +13,7 @@ class StripeTransactionResponse {
         $response = new TransactionResponse();
 
         $response->setOrderId($data->id);
-        $response->setTransactionId($data->id);
+        $response->setTransactionId($data->payment_intent);
         $response->setAmount($data->amount_total);
         $response->setStatus($data->payment_status == "paid" ? TransactionResponse::$TRANSACTION_SUCCESS : "UNPAID");
         $response->setTimestamp($data->created);
